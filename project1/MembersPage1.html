@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title> Members Page </title>
+			<meta http-equiv="content-type"
+		content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">	
+	</head>
+	<body>
+
+<header>Riverside Sports Club
+</header>
+<nav>
+</nav>
+<asideLeft><br>
+<a name = "Main Page" href="html.html" TITLE = "Main Menu">Main Menu</a><br><br>
+<a name = "Facility Bookings Page" href="FacilityBookings.html" TITLE = "Facility Bookings Page">Facility Bookings Page</a><br><br>
+<a name = "Payments Page" href="PaymentsPage.html" TITLE = "Payments Page">Payments Page</a><br><br>
+<a name = "Members Page" href="MembersPage.html" TITLE = "Members Page">Members Page</a><br><br>
+<a name = "Equipment Page" href="EquipmentPage.html" TITLE = "Equipment Page">Equipment Page</a><br><br>
+<a name = "Reports Page" href="ReportsPage.html" TITLE = "Reports Page">Reports Page</a><br><br>
+
+</asideLeft>
+<section>
+<form name="Members" action= "insert.php" method="post">  	
+
+<fieldset>
+  
+	<legend>Members Page - Personal Information:</legend>
+	<a name = "new_member" href="html.html" TITLE = "New Member">Create a New Member </a><br><br>
+	<a name = "update_member" href="html.html" TITLE = "Update Member">Update a Members Details</a><br><br>
+	<a name = "view_members" href="html.html" TITLE = "View Members">View Members</a><br><br>
+		 
+	Member Number:
+	<input type="number" name="member_number " disabled><br><br>
+	Member Name:
+	<input type="text" name="member_name "><br><br>
+	Sporting Organisation:
+	<input type="checkbox" name="sporting_organisation" value="sporting_organisation"><br><br>
+	Member Telephone Number:
+	<input type="tel" name="member_tel_num"><br><br>
+	Member Address<br>
+	<textarea name="member_address" rows="5" cols="50" position= top>			
+	</textarea><br><br>
+	Member DOB:	
+	<input type="date" name="member_dob"><br><br>
+	Member Email:
+	<input type = "email" name="member_email"><br><br>
+		
+<input type="submit" value="Submit" />
+  </fieldset>
+  </form>
+<asideRight style = "float: right;">
+
+</asideRight>
+<footer> RoseberryDesigns.com
+</footer>
+
+</body>
+</html>
+
+

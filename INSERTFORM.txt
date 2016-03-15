@@ -1,0 +1,12 @@
+<html>
+<body>
+
+<form action="insert.php" method="post">
+Dept ID: <input type="text" name="Dept" />
+Dept Name: <input type="text" name="DeptName" />
+Location: <input type="text" name="Location" />
+<input type="submit" />
+</form>
+
+</body>
+</html> 

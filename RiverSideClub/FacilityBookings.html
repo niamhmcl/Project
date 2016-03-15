@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title> Facilities Page </title>
+			<meta http-equiv="content-type"
+		content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body onload="document.FacilityBookings.facility_name.focus();">
+<header>Riverside Sports Club
+</header>
+<nav>
+</nav>
+<asideLeft style = ><br>
+<a name = "Main Page" href="HomePage.html" TITLE = "Main Menu">Main Menu</a><br><br>
+<a name = "Facility Bookings Page" href="FacilityBookings.html" TITLE = "Facility Bookings Page">Facility Bookings Page</a><br><br>
+<a name = "Payments Page" href="PaymentsPage.html" TITLE = "Payments Page">Payments Page</a><br><br>
+<a name = "Members Page" href="MembersPage.html" TITLE = "Members Page">Members Page</a><br><br>
+<a name = "Equipment Page" href="EquipmentPage.html" TITLE = "Equipment Page">Equipment Page</a><br><br>
+<a name = "Reports Page" href="ReportsPage.html" TITLE = "Reports Page">Reports Page</a><br><br>
+
+</asideLeft>
+
+<section>
+<form action="php/insert.php" method="post">
+<fieldset>
+	
+	<legend>Facility Bookings:</legend><br>
+	
+	<a name = "new_booking" href="HomePage.html" TITLE = "New Booking">Create a New Facility Booking</a><br><br>
+	<a name = "update_booking" href="HomePage.html" TITLE = "Update Booking">Update Booking</a><br><br>
+	<a name = "view_bookings" href="HomePage.html" TITLE = "View Bookings">View Bookings</a><br><br>
+	
+    Facility Booking Reference Number:
+	<input type="number" name="facility_booking_reference_number" disabled><br><br>
+	Facility Type:   <select name="facility_name" required>
+		<option value="tennis1">Tennis Court 1</option>
+		<option value="tennis2">Tennis Court 2</option>
+		<option value="tennisAll">Book all Tennis Courts</option>
+		<option value="gym">Gym</option>
+		<option value="beauty_treatment">Beauty Treatment</option>
+	</select><br><br>
+	Booking Date:
+	<input type="date" name="date" required><br><br>
+	Start Time of Booking:
+	<input type="time" name="start_time" required><br><br>
+	End Time of Booking:
+	<input type="time" name="end_time" required><br><br>
+	Member Number:
+	<input type="number" name="member_number" required><br><br>
+	Instructor Required:
+	<select name="instructor_required" required>
+		<option value="no">no</option>
+		<option value="yes">yes</option>	
+	</select>
+	
+    <br><br>
+    <input type="submit" value="Submit">
+  </form>
+  </fieldset>
+</section>
+
+<asideRight style = "float: right; ">
+</asideRight>
+<footer> RoseberryDesigns.com
+</footer>
+</body>
+</html>

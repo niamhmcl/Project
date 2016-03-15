@@ -1,0 +1,17 @@
+body {
+		background-color: #FFCC66;
+			background-image: url("butterfly.gif");  
+			background-repeat: no-repeat;
+			Background-attachment: fixed
+	}
+
+	h1 {
+		color: #990000;
+		background-color: #FC9804;
+	}
+p.first{ color: blue; }
+p.second{ color: green; }	
+
+p.exampleID1 { background-color: white; } 
+p.exampleID2 { text-transform: uppercase; } 
+p.exampleID3 { background-color: #013370; color: white;} 

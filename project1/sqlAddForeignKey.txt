@@ -1,0 +1,53 @@
+<?php
+error_reporting(E_ALL ^ E_DEPRECATED);
+$con = mysql_connect("localhost","root"); //connecting to database
+if (!$con)
+  {
+  die('Could not connect: ' . mysql_error()); //if connection is unsuccessful it give a message 'could not connect'
+  }
+echo "Thank you foron needed";
+mysql_select_db("riverside", $con); //tells which database that you want to work with
+
+$sql="INSERT INTO facility_booking (facility_name, date, start_time, end_time, member_number, instructor_required)
+VALUES 
+('$_POST['$_POST[facility_name]','$_POST[date]','$_POST[start_time]','$_POST[end_time]','$_POST[member_number]','$_POST[instructor_required]')";
+
+
+
+
+
+if (!mysql_query($sql,$con)) //this executes all the code above for the sql statement
+  {
+  die('Error: ' . mysql_error());
+  }
+echo "Thank you for entering information needed";
+
+mysql_close($con); //closing connection to database
+?> 
+
+
+
+$sql="INSERT INTO facility_booking (facility_booking_reference_number, facility_name, date, start_time, end_time, member_number, instructor_required)
+VALUES ('$_POST[facility_booking_reference_number]','$_POST[facility_name]','$_POST[date]','$_POST[start_time]','$_POST[end_time]','$_POST[member_number]'
+
+ALTER TABLE repairs
+ADD FOREIGN KEY (equip_num)
+REFERENCES equipment(equip_num)
+
+ALTER TABLE facility_booking
+ADD FOREIGN KEY (member_number)
+REFERENCES member(member_number)
+
+ALTER TABLE instructor
+ADD FOREIGN KEY (booking_reference_num)
+REFERENCES facility_booking(facility_booking_reference_number)
+
+ALTER TABLE payments
+ADD FOREIGN KEY (member_num)
+REFERENCES member(member_number)
+
+<script type="text/javascript">
+    document.getElementById("myButton").onclick = function () {
+        location.href = "www.yoursite.com";
+    };
+</script>

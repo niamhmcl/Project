@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title> Payments Page </title>
+			<meta http-equiv="content-type"
+		content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>
+	<body onload="document.PaymentsPage.member_num.focus();">
+
+<header>Riverside Sports Club
+</header>
+<nav>
+</nav>
+<asideLeft><br>
+<a name = "Main Page" href="HomePage.html" TITLE = "Main Menu">Main Menu</a><br><br>
+<a name = "FacilIty Bookings Page" href="FacilityBookings.html" TITLE = "Facility Bookings Page">Facility Bookings Page</a><br><br>
+<a name = "Payments Page" href="PaymentsPage.html" TITLE = "Payments Page">Payments Page</a><br><br>
+<a name = "Members Page" href="MembersPage.html" TITLE = "Members Page">Members Page</a><br><br>
+<a name = "Equipment Page" href="EquipmentPage.html" TITLE = "Equipment Page">Equipment Page</a><br><br>
+<a name = "Reports Page" href="ReportsPage.html" TITLE = "Reports Page">Reports Page</a><br><br>
+
+
+</asideLeft>
+
+<section>
+ <form name = "PaymentsPage" method="post">
+<fieldset>
+  
+	<legend>Payments:</legend><br>
+	
+	<a name = "make_payment" href="HomePage.html" TITLE = "make payment">Make a Payment</a><br><br>
+	<a name = "view_outstanding_bills" href="HomePage.html" TITLE = "view_bills">View Bills Outstanding</a><br><br>
+	<a name = "view_payment_history" href="HomePage.html" TITLE = "view payments">View Payment History</a><br><br>
+	
+	Payment Reference Number:
+	<input type="number" name="payment_reference_num" disabled><br><br>
+	Member Number:
+	<input type="number" name="member_num" required><br><br>
+	Payment Issue Date:
+	<input type="date" name="Dste_of_issue" required><br><br>
+	Payment Amount:
+	<input type="number" name="payment_amount" required><br><br>
+	Payment Received Date:
+	<input type="date" name="payment_received_date" ><br><br>
+	Payment Method:
+	<select name="payment_method" >
+		<option value="cash">Cash</option>
+		<option value="creditCard">Credit Card</option>
+		<option value="laserCard">Laser Card</option>
+	</select>
+	
+    <br><br>
+    <input type="submit" value="Submit">
+  </fieldset>
+  </form>
+</section>
+<asideRight style = "float: right;">
+</asideRight>
+<footer> RoseberryDesigns.com
+</footer>
+</body>
+</html>

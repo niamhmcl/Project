@@ -1,0 +1,70 @@
+body{
+background-color: peru; 
+
+}
+header{
+	background-color:  Peru;
+	height: 100px;
+	width: 100%;
+	font-size: 50px;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+}
+section{ 
+	background-color:  Tan;
+		height: 550px;
+		width: 700px;
+		float: left;
+		font-size: 20px;
+		font-weight: bold;
+		color: black;
+		text-align: left;
+		overflow : auto;
+}
+asideLeft{	
+	height: 600px;
+	width: 200px;
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	background-color:Peru;
+}
+
+asideRight{	
+	height: 600px;
+	width: 200px;
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	background-color:Peru;
+	background-image: url("../images/tennis-balls.jpg");
+	background-position: top, center, bottom;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+	back
+}
+
+footer{
+	background-color:  Peru;
+	height: 100px;
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	float: left;
+	text-align: center;
+}
+
+a:hover {
+color: black; 
+background-color: white;
+text-decoration: none;
+border: 2px solid black; 
+
+} 
+
+
+
+    

@@ -1,0 +1,865 @@
+﻿modify - Alter the width of the project budget field to 8 places including 2 decimal places
+ALTER TABLE proj MODIFY COLUMN budget decimal(8, 2);
+
+update - Update the emp table to give all clerk's a £100 increase in salary.
+update emp set sal = sal + 100 where job = 'Clerk'; //update records on a table 
+
+insert // insert a new record
+drop tABLE
+delete // de;lete records   DELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste' AND ContactName='Maria Anders';
+alter - Alter the width of the project budget field
+Give the emp table a column called projno and describe the table. The proj field should have the same type and
+size as in the proj table.
+ALTER TABLE emp add  COLUMN projno int (11);
+DESCRIBE emp;
+
+Using a single command, create a table called promotion with fields called ename, job, salary, and comm, then
+copy the corresponding data from the fields in the emp table into the promotion table for all those employee
+whose commission is more than one quarter of their salary.
+create table promotion as
+select ename, job, sal, comm
+from emp
+where comm > 0.25 * sal ;
+
+select ename, job, to_char(hiredate,'DY DD MM YYYY')hiredate
+from emp
+where deptno = 20;
+
+select ename, job from emp where ename IN (SELECT ENAME 
+                  FROM EMP
+                  WHERE job IN
+                  (select job from emp where ENAME="Jones"));
+
+desc emp - table structure
+create view personnel as select ename, job, pname from emp, proj
+where emp.projno = proj.projno ;
+
+Get the maximum salary paid in each department.
+Hint : Use group by and max(sal)
+select job, max(sal) as HighestSal from emp group by JOB
+
+Get the number of employees in each job in each department in the company. Also list the department they are
+in, the job title, the sum of the salaries of each employee type in each department, the average salary of each
+employee type in each department, and show the information grouped by department name and job.
+Hint : Use sum(sal), count(*), avg(sal) and group by.
+Note : Count(*) counts the number of rows in each group as defined by the 'group by' command.
+Note : Sum and Avg work the groups of rows as defined by the 'group by' command.
+SELECT job, dname, sum(sal), COUNT(*), avg(sal) FROM emp, dept where emp.DEPTNO = dept.DEPTNO group by dname, job
+
+owen: select dname, job, sum(sal), count(*), avg(sal)
+from emp, dept
+where emp.deptno = dept.deptno
+group by dname, job;
+
+// Tip: The SELECT INTO statement can also be used to create a new, empty table using the schema of another. Just add a WHERE clause that causes the query to return no data:
+SELECT * INTO newtable FROM table1 WHERE 1=0;
+
+INSERT INTO Customers (CustomerName, Country) SELECT SupplierName, Country FROM Suppliers;
+INSERT INTO Customers (CustomerName, Country) SELECT SupplierName, Country FROM Suppliers WHERE Country='Germany';
+
+CREATE DATABASE dbname;
+
+CREATE TABLE Persons
+(
+P_Id int NOT NULL PRIMARY KEY UNIQUE,
+LastName varchar(255) NOT NUILL,
+FirstName varchar(255),
+Address varchar(255),
+City varchar(255), 
+CONSTRAINT pk_PersonID PRIMARY KEY (P_Id,LastName)
+);
+
+CREATE TABLE Orders
+(
+O_Id int NOT NULL,
+OrderNo int NOT NULL,
+P_Id int,
+PRIMARY KEY (O_Id),
+FOREIGN KEY (P_Id) REFERENCES Persons(P_Id)
+)
+ALTER TABLE Orders
+ADD CONSTRAINT fk_PerOrders
+FOREIGN KEY (P_Id)
+REFERENCES Persons(P_Id)
+ALTER TABLE Orders
+DROP CONSTRAINT fk_PerOrders
+
+check
+CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Address varchar(255),
+City varchar(255),
+CHECK (P_Id>0)
+)
+ALTER TABLE Persons
+ADD CONSTRAINT chk_Person CHECK (P_Id>0 AND City='Sandnes')
+ALTER TABLE Persons
+DROP CONSTRAINT chk_Person
+
+CREATE TABLE Orders
+(
+O_Id int NOT NULL,
+OrderNo int NOT NULL,
+P_Id int,
+City varchar(255) DEFAULT 'Sandnes',
+OrderDate date DEFAULT GETDATE()
+)
+CREATE INDEX PIndex ON Persons (LastName, FirstName)
+DROP DATABASE database_name
+#ALTER TABLE table_name
+DROP COLUMN column_name
+SELECT COUNT(DISTINCT column_name) FROM table_name;
+SELECT COUNT(*) FROM table_name;
+SELECT COUNT(column_name) FROM table_name;
+SELECT SUM(Quantity) AS TotalItemsOrdered FROM OrderDetails;
+SELECT MIN(Price) AS SmallestOrderPrice FROM Products;
+SELECT UCASE(CustomerName) AS Customer, CityFROM Customers;
+SELECT LCASE(CustomerName) AS Customer, City FROM Customers;
+SELECT MID(City,1,4) AS ShortCity FROM Customers;
+SELECT ProductName, ROUND(Price,0) AS RoundedPrice FROM Products;
+
+SELECT Employees.LastName, COUNT(Orders.OrderID) AS NumberOfOrders FROM (Orders
+INNER JOIN Employees
+ON Orders.EmployeeID=Employees.EmployeeID)
+GROUP BY LastName
+HAVING COUNT(Orders.OrderID) > 10;
+
+SELECT AVG(Price) AS PriceAverage FROM Products;
+SELECT ProductName, Price FROM Products
+WHERE Price>(SELECT AVG(Price) FROM Products);
+
+
+CREATE TABLE table_name
+(
+column_name1 data_type(size) constraint_name,    NOT NULL   UNIQUE   PRIMARY KEY  FOREIGN KEY   CHECK   DEFAULT 
+column_name2 data_type(size) constraint_name,
+column_name3 data_type(size) constraint_name,
+....
+);
+Show the same information as query 1 does but only show the groups having at least two employees.
+Hint : Having count(*)
+select dname, job, sum(sal), count(*), avg(sal)
+from emp, dept
+where emp.deptno = dept.deptno
+group by dname, job
+having count(*) >= 2;
+
+Update emp
+set job = ‘MANAGER’,
+sal = sal + 1000,
+deptno = 40
+where comm >= all (select comm. from emp);
+
+grant select on emp to adams ;
+
+INSERT INTO Customers (CustomerName, City, Country)
+VALUES ('Cardinal', 'Stavanger', 'Norway');
+
+select * from emp
+SELECT ename, EMPNO from emp
+insert into dept (DEPTNO, DNAME, LOC) values (50, 'PENSIONS', 'CHICAGO')
+select ename from emp where deptno = 30
+SELECT * from emp where job = MANAGER && sal > 2500
+insert into dept (DEPTNO, DNAME, LOC) values (202, "Niamh", "dublin")
+select ENAME, job, DEPTNO from emp where job = "MANAGER" AND DEPTNO != 30
+select ENAME, SAL from emp where sal between 1200 and 1400
+select * from dept where deptno in (10,30)
+select ENAME from emp where ename like '__%'
+SELECT * FROM Customers WHERE Country='Germany' AND (City='Berlin' OR City='München');
+SELECT * FROM `dept` order by DNAME
+SELECT * FROM Customers ORDER BY Country DESC;
+SELECT * FROM Customers ORDER BY Country ASC, CustomerName DESC;
+
+-------------------------------------------------------------
+
+SQL Problem Sheet 2
+
+
+1. select sal, job, ename
+from emp
+where deptno = 30
+order by sal;
+
+2. list the job, salary and emp name for all employees in the emp table. display therows in in job order and the in  desc 
+salary order 
+select sal, job, ename
+from emp
+order by job, sal desc;
+
+3 . get a listing of the distict jobs in the emp table
+select distinct job from emp;
+
+4. select ename, deptno
+from emp
+where ename = 'ADAMS';
+
+5 select loc
+from dept
+where deptno = 20;
+
+
+6. select ename, loc
+from emp, dept
+where ename = 'ADAMS'
+and emp.deptno = dept.deptno;
+
+
+7. select ename, sal, comm, sal + comm
+from emp
+where job = 'SALESMAN';
+
+
+8. select ename, job, to_char(hiredate,'DY DD MM YYYY')hiredate
+from emp
+where deptno = 20;
+
+
+9. select empno, ename, job, emp.deptno, loc
+from emp, dept
+where emp.deptno = dept.deptno;
+Note: As department number appears in both emp and dept you need to say which table Oracle should take the 
+department number from. Otherwise you will get a ‘column ambiguously defined’ error.
+
+
+10. select deptno, max(sal) from emp
+
+
+select emp.ENAME, emp.JOB, emp.HIREDATE from emp where emp.DEPTNO = 20;
+
+Get the employee number, employee name, job, department number and department location of all employees..
+
+Did you get an error?. What caused the error?
+select emp.ENAME, emp.EMPNO, emp.JOB, emp.DEPTNO, dept.LOC from emp inner join dept where emp.DEPTNO = dept.DEPTNO
+
+Get the maximum salary paid in each department.
+Hint : Use group by and max(sal)
+select job, max(sal) as HighestSal from emp group by JOB
+
+
+----------------------------------------------------------
+
+SQL Problem Sheet 3
+
+Get the number of employees in each job in each department in the company. Also list the department they are
+in, the job title, the sum of the salaries of each employee type in each department, the average salary of each
+employee type in each department, and show the information grouped by department name and job.
+Hint : Use sum(sal), count(*), avg(sal) and group by.
+Note : Count(*) counts the number of rows in each group as defined by the 'group by' command.
+Note : Sum and Avg work the groups of rows as defined by the 'group by' command.
+SELECT job, dname, sum(sal), COUNT(*), avg(sal) FROM emp, dept where emp.DEPTNO = dept.DEPTNO group by dname, job
+
+owen: select dname, job, sum(sal), count(*), avg(sal)
+from emp, dept
+where emp.deptno = dept.deptno
+group by dname, job;
+
+Create a Primary Key on empno in the emp table. Call the Constraint pk_emp.
+alter table emp
+add (constraint pk_emp primary key (empno) );
+
+
+2. 
+Show the same information as query 1 does but only show the groups having at least two employees.
+Hint : Having count(*)
+select dname, job, sum(sal), count(*), avg(sal)
+from emp, dept
+where emp.deptno = dept.deptno
+group by dname, job
+having count(*) >= 2;
+
+List the names and jobs for all of the employees having the same job as JONES.
+Hint : Use a subquery.
+select ename, job from emp where ename IN (SELECT ENAME 
+                  FROM EMP
+                  WHERE job IN
+                  (select job from emp where ENAME="Jones"));
+                  
+List the name and salary of each employee who earns more than the average of all of the employees salaries.
+Hint : Use a subquery and the avg function
+select ename, sal from emp where SAL IN (SELECT SAL 
+                  FROM EMP 
+                  WHERE SAL >(select avg(sal) from emp));
+
+owen : select ename, sal
+from emp
+where sal > ( select avg(sal)
+from emp);
+
+Update the emp table to give all clerk's a £100 increase in salary.
+update emp set sal = sal + 100 where job = 'Clerk';
+
+Using a single command, create a table called promotion with fields called ename, job, salary, and comm, then
+copy the corresponding data from the fields in the emp table into the promotion table for all those employee
+whose commission is more than one quarter of their salary.
+
+create table promotion as
+select ename, job, sal, comm
+from emp
+where comm > 0.25 * sal ;
+
+delete from dept
+where deptno = 50 ;
+
+
+
+
+
+Delete all records in the dept table which have a department number of 50 and then view the contents of the table
+to ensure that the operation has been completed correctly.
+delete from dept WHERE DEPTNO =  50;
+
+select * from emp10 ;
+
+
+
+
+
+Create a view called emp10 with the empno, ename, and job data for department 10. When you create the view
+give it the check option.
+create view emp10 as
+select empno, ename, job
+from emp
+where deptno = 10
+with check option ;
+
+
+
+Insert the following information into the EMP10 view
+20 BAILEY MANAGER
+Note : Can you see the reason for the problem ?	
+insert into EMP10
+values (20, 'BAILEY', 'MANAGER');
+
+
+List all of the data in view emp10.
+select * from emp10
+
+
+--------------------------------------------------------------------------------------------------------
+
+SQL Problem Sheet 4
+
+
+Create a table called proj with the following fields :
+projno numeric 3 long not null
+pname character 5 long
+budget numeric 7 long with 2 decimal places
+
+CREATE TABLE proj( projno INT (3) not null, pname varchar (5), budget float (7, 2) )
+
+    
+Insert into proj the following data
+101 ALPHA 96000
+102 BETA 82000
+103 GAMMA 15000
+INSERT INTO proj (projno, pname, budget) VALUES (102, 'Beta', 9600), (103, 'Gamma', 82000), (104, 'Zeta', 15000);
+
+View the data in proj.
+SELECT * FROM `proj` WHERE 1
+
+Give the emp table a column called projno and describe the table. The proj field should have the same type and
+size as in the proj table.
+ALTER TABLE emp
+add  COLUMN projno int (11);
+DESCRIBE emp;
+
+
+Assign everyone in department 20 and every salesman to project 101 and view the emp table.
+UPdate emp 
+set projno = 101
+where DEPTNO =  20 OR JOB = 'SALESMAN';
+
+UPdate emp 
+set projno = 102
+where DEPTNO =  20 OR JOB = 'SALESMAN';
+
+SELECT * FROM EMP
+
+
+Assign everyone else to project 102 and view the emp table
+UPdate proj
+set projno = 102
+where !(projno = 101);
+
+select * from proj;
+owen: update emp
+set projno = 102
+where projno is null ;
+
+List the employee numbers, jobs, department numbers and project name's
+select ename, job, deptno, pname
+from emp, proj
+where emp.projno = proj.projno ;
+
+Alter the width of the project budget field to 8 places including 2 decimal places
+ALTER TABLE proj
+MODIFY COLUMN budget decimal(8, 2);
+alter table proj
+modify budget number (8,2) ;
+
+Change the budget for project 103 to 105000
+UPDATE proj
+SET budget = 10500
+WHERE projno=103;
+select * from proj;
+
+View the employee, number, name, department number, department location, project name and project budget
+SELECT DISTINCT ENAME, EMPNO, EMP.DEPTNO, LOC, PNAME, BUDGET, emp.projno
+	FROM EMP, dept, proj
+    	WHERE emp.DEPTNO = dept.DEPTNO AND	
+        	emp.projno = proj.projno
+            group by ename;
+ 
+-------------------------------------------------------------------------------------------------------------------
+
+Answers to SQL Problem Sheet 5
+                                       
+Create a view called PERSONNEL which contains employee names, jobs and project names.
+create view personnel as select ename, job, pname from emp, proj where emp.projno = proj.projno ;
+ 
+Using the PERSONNEL view, select the employee names, jobs and project names for all employees who are
+manager
+select * from personnel where job = 'MANAGER' ;
+
+Delete the PERSONNEL view
+drop view personnel ;
+
+
+
+
+Give another user select rights on your emp table and have them try a select operation on it
+grant select on emp to adams ;
+
+Create a new view called emps with empno, ename, job, mgr, hiredate and deptno.
+create view emps as select empno, ename, job, mgr, hiredate, deptno from emp ;
+
+
+Update the emp table, move the employee with the highest commission to department number 40, make him/her
+a manager and give him/her a pay raise of £1000.
+Hint : Use a subquery and >= all as with the ALL and ANY slide on the SQL Commands Handout.
+Update emp
+set job = ‘MANAGER’,
+sal = sal + 1000,
+deptno = 40
+where comm >= all (select comm. from emp);
+brendan
+
+create table employee
+(first varchar(15),
+ last varchar(20),
+ age number(3),
+ address varchar(30),
+ city varchar(20),
+ state varchar(20));
+
+update employee
+  set age = age+1
+  where first_name='Mary' and last_name='Williams';
+
+set job = 'MANAGER',
+sal = sal + 1000,
+deptno = 40
+where comm >= all (select comm from (select comm from emp) as t);
+
+select *
+from information_schema.table_constraints
+where constraint_schema = 'test';
+
+6. Create a Foreign Key on deptno in the emp table. It should reference the primary key in the dept table Call the Constraint fk_emp_dept.
+
+alter table emp
+add (constraint fk_emp_dept foreign key (deptno)
+references dept (deptno) ) ;
+
+7. Create a Foreign Key on projno in the emp table. It should reference the primary key in the proj table Call the Constraint fk_emp_proj.
+
+ALTER TABLE emp
+add(constraint fk_emp_proj foreign key (projno) 
+references proj (projno));
+
+sheet 6b question 7: this worked for me ALTER TABLE emp DROP FOREIGN KEY fk_emp_proj
+
+Get the employee name, department name and project name of all employees.
+
+SELECT ename, dept.DNAME, proj.pname FROM EMP, DEPT, PROJ  WHERE emp.DEPTNO = dept.DEPTNO and emp.projno = proj.projno
+
+owen: select ename, dname, pname
+from emp, dept, proj
+where emp.deptno = dept.deptno
+and emp. projno = proj.projno;
+
+
+Get the employee number, employee name, department number, department name, department location, project
+number, project name and project budget of all employees called ‘ADAMS’.
+
+SELECT emp.EMPNO, ename , dept.DEPTNO, dept.DNAME, dept.LOC, proj.projno, proj.pname 
+FROM EMP, DEPT, PROJ  WHERE emp.ENAME = 'Adams' and emp.DEPTNO = dept.DEPTNO and emp.projno = proj.projno
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+sheet 6 (a)
+
+
+
+1. Create a Primary Key on empno in the emp table. Call the Constraint pk_emp.
+alter table emp
+add (constraint pk_emp primary key (empno) );
+
+
+2. Insert a record into emp with the following values:
+empno: 8000 ename: JONES job: CLERK mgr: 0
+hiredate:12-DEC-99 sal: 1250 comm.: 0 deptno: 10 projno: 101
+
+insert into emp values (8000, ‘JONES’, ‘CLERK’, 0, ’12-DEC-99’, 1250, 0, 10, 101);
+
+
+insert into emp values (8000, 'smith', 'manager', 1890, '10=jan-99', 1950, 0, 20, 102)
+You will get an Oracle error saying unique constraint (username.pk_emp) violated. This means 
+that an attempt was made to violate or break the unique primary key constraint pk_emp which 
+you set up in problem 1 by inserting a second employee with the same empno as in problem number 2.3.
+
+
+3
+
+4 Create a Primary Key on deptno in the dept table. Call the Constraint pk_dept
+alter table dept
+add (constraint pk_dept primary key (deptno) );
+
+
+5
+Create a Primary Key on projno in the proj table. Call the Constraint pk_proj.
+alter table proj
+add (constraint pk_proj primary key (projno) );
+
+6
+Create a Foreign Key on deptno in the emp table. It should reference the primary key in the dept table Call the
+Constraint fk_emp_dept.
+
+alter table emp
+add (constraint fk_emp_dept foreign key (deptno)
+references dept ) ;
+
+7
+Create a Foreign Key on projno in the emp table. It should reference the primary key in the proj table Call the
+Constraint fk_emp_proj
+
+alter table emp
+add (constraint fk_emp_proj foreign key (projno)
+references proj ) ;
+
+
+8 
+Insert a record into emp with the following values:
+empno: 8010 ename: WALKER job: CLERK hiredate:12-FEB-99 mgr: 0
+sal: 2250 comm.: 0 deptno: 10 projno: 102
+insert into emp values (8010, ‘WALKER’, ‘CLERK’, 0, ’12-FEB-99’, 2250, 0, 10, 102);
+
+9
+Insert a record into emp with the following values:
+empno: 8012 ename: BAKER job: SALESMAN hiredate:15-FEB-99 mgr: 0
+sal: 2050 comm.: 590 deptno: 90 projno: 102
+What happens? Why did this happen.?
+
+insert into emp values (8012, ‘BAKER’, ‘SALESMAN’, 0, ’15-FEB-99’, 2050, 590, 90, 102);
+You will get the following Oracle error: integrity constraint (username.fk_emp_dept) 
+violated – parent key not found. This means that an attempt was made to violate or 
+break the primary/foreign key constraint fk_emp_dept which you set up in problem 6 
+by inserting an employee into a department that doesn’t exist.
+
+10
+Insert a record into dept with the following values:
+deptno: 90 dname: RandD loc: GALWAY
+insert into dept VALUES (90, 'RandD', 'GALWAY')
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------
+
+
+sheet 6(b)
+
+1
+Repeat action 9
+What happens? Why did this happen.?
+insert into emp values (8012, ‘BAKER’, ‘SALESMAN’, 0, ’15-FEB-99’, 2050, 590, 90, 102);
+This time you should not have any problem inserting the record because department 90 has been added to the dept table.
+
+2
+Insert a record into emp with the following values:
+empno: 8115 ename: FERRY job: ANALYST hiredate:19-MAR-99 mgr: 0
+sal: 1950 comm.: 0 deptno: 20 projno: 104
+What happens? Why did this happen.?
+insert into emp values (8115, ‘FERRY’, ‘ANALYST’, 0, ’19-MAR-99’, 1950, 0, 20, 104);
+You will get the following Oracle error: integrity constraint (username.fk_emp_proj) 
+violated – parent key not found. This means that an attempt was made to violate or 
+break the primary/foreign key constraint fk_emp_proj which you set up in problem 7 by 
+inserting an employee into a project that doesn’t exist.
+
+3
+Insert a record into dept with the following values:
+projno: 104 pname: HEAT budget: 10000
+
+
+insert into proj (104, 'HEAT', 1000) 
+
+4
+insert into emp values (8115, ‘FERRY’, ‘ANALYST’, 0, ’19-MAR-99’, 1950, 0, 20, 104);
+This time you should not have any problem inserting the record because department 90 has been added to the dept table.
+
+5
+Delete department number 90 in dept
+What happens? Why did this happen.? What do you have to do to be able to delete department number 90?
+
+delete from dept
+where deptno = 90 ;
+You will get the following Oracle error: integrity constraint (username.fk_emp_dept) violated – child record found. This means that an 
+attempt was made to violate or break the primary/foreign key constraint fk_emp_dept which you set up in problem 7 by deleting a department
+ which still has employees assigned to it. In order to delete from department number 90 you must ensure that there are no employees currently
+ assigned to the department. You may either update employees department numbers to move them to another department or you may delete them. 
+Of course you could also drop the primary/foreign key constraint but this is not recommended.
+
+6
+Access the data dictionary and retrieve your list of integrity constraints.
+Hint: user_constraints table, don’t forget to describe it first, its got lost of fields
+
+select constraint_name, constraint_type
+from user_constraints;
+
+7
+Drop the foreign-key integrity constraint between emp and proj.
+
+alter table emp
+drop constraint fk_emp_proj ;
+
+8 Create a constraint on sal in the emp table to ensure that the minimum salary must be over £500. Call the
+Constraint emp_sal_check.
+
+alter table emp
+add (constraint emp_sal_check check (salary > 500) ) ;
+
+
+
+9. Insert a record into emp with the following values:
+empno: 8502 ename: HEART job: ANALYST hiredate:08-MAY-99 mgr: 0
+sal: 300 comm.: 0 deptno: 10 projno: 102
+What happens? Why did this happen.?
+
+insert into emp values (8502, ‘HEART’, ‘ANALYST’, 0, ’08-MAY-99’, 300, 0, 10, 102);
+You will get the following Oracle error: integrity constraint (username.emp_sal_check). This means that an attempt was made to violate or 
+break the constraint emp_sal_check which you set up in problem 18 by inserting an employee with a salary of less than £500.
+
+
+10. Change the employees salary to £600 and try to insert it again.
+insert into emp values (8502, ‘HEART’, ‘ANALYST’, 0, ’08-MAY-99’, 600, 0, 10, 102);
+This time you should not have any problem inserting the record because salary has been increased to more than £500.
+
+
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SQL Problem Sheet 7 – SQL Security
+
+
+1. Give another user select and update rights on your emp table 
+grant select, update // adams is simply an example of what the other persons username might be.
+on emp
+to adams ;
+
+2. 2. Ask the other user to select data from your emp table
+2. select *
+from username.emp; // where username is you own username
+
+
+3. Ask the other user to update the name of employee number 7782 by changing it to ‘FIELDS’
+3. update username.emp
+set ename = ‘FIELDS’
+where empno = 7782 ;
+
+4. a) View the change.
+b) Is it visible?
+c) If not why not?
+d) What must you do to make it visible?
+4. a) select * from emp;
+b) The change should not be visible yet.
+c) The person who made the change needs to commit it before it becomes visible to another user.
+d) Commit the change using commit; and ask the owner of the table to look at the table again. The change
+should now be visible.
+
+5. Give every user select rights on your emp table.
+Hint: Public.
+
+5. grant select
+on emp
+to public ;
+
+
+6. Revoke the other users update rights on your emp table and have them try that operations on it.
+6. revoke update
+on emp
+from adams ;
+
+
+To be completed after the Database System Security Lecture
+7. 7. Create a role called developer
+create role developer ;
+
+8. Grant three privileges: create table, create view and create procedure to the developer role
+grant create table, create view, create procedure to developer ;
+
+9. Give one of your class-mates access to the developer role
+grant developer to username
+
+10. Revoke the create procedure privilege from the developer role
+revoke create procedure from developer ;
+
+11. Create a role called analyst which with the following password: ‘secure’
+create role analyst identified by secure ;
+
+12. Grant a privilege to analyst which will allow its user to select data from your dept table
+grant select on dept to analyst ;
+
+13. Grant the analyst role to a class-mate ;
+grant analyst to username ;
+
+14. Have your class-mate bring the analyst role on-line. Remember its got a password
+set role analyst identified by secure ;
+
+15. Have your class-mate retrieve data from your dept table.
+select * from username.dept ;
+
+16. Drop the developer role
+drop role developer ;
+
+17. Drop the analyst role.
+drop role analyst ;
+
+
+
+txtUserId = getRequestString("UserId");
+txtSQL = "SELECT * FROM Users WHERE UserId = " + txtUserId;
+
+select top //returns limikted no of records ie a large db
+SELECT * FROM Persons LIMIT 5;
+SELECT TOP 2 * FROM Customers;
+SELECT *
+FROM Persons
+WHERE ROWNUM <=5;
+SELECT TOP 50 PERCENT * FROM Customers;  //retrunrs the first 50% of customer records in the table
+
+
+SELECT * FROM Customers WHERE City LIKE 's%';
+SELECT * FROM Customers wHERE Country LIKE '%land%';
+SELECT * FROM Customers WHERE Country NOT LIKE '%land%';
+SELECT * FROM Customers WHERE City LIKE 'ber%';   //  selects all customers with a City starting with "ber":
+SELECT * FROM Customers WHERE City LIKE '_erlin';  // selects all customers with a City starting with any character, followed by "erlin"
+SELECT * FROM Customers WHERE City LIKE 'L_n_on';
+SELECT * FROM Customers WHERE City LIKE '[bsp]%'; //  selects all customers with a City starting with "b", "s", or "p": 
+not SELECT * FROM Customers WHERE City LIKE '[!bsp]%';
+
+IN 
+SELECT * FROM Customers WHERE City IN ('Paris','London');  // all customers with a City of "Paris" or "London":
+
+SELECT * FROM Products WHERE Price BETWEEN 10 AND 20; //  all products with a price BETWEEN 10 and 20:
+SELECT * FROM Products WHERE Price NOT BETWEEN 10 AND 20;
+SELECT * FROM Products WHERE (Price BETWEEN 10 AND 20) AND NOT CategoryID IN (1,2,3);
+SELECT * FROM Products WHERE ProductName BETWEEN 'C' AND 'M';
+SELECT * FROM Products WHERE ProductName NOT BETWEEN 'C' AND 'M';
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN #07/04/1996# AND #07/09/1996#;
+
+Alias
+SELECT column_name(s) FROM table_name AS alias_name;
+SELECT CustomerName AS Customer, ContactName AS [Contact Person]
+FROM Customers;
+SELECT o.OrderID, o.OrderDate, c.CustomerName
+FROM Customers AS c, Orders AS o
+WHERE c.CustomerName="Around the Horn" AND c.CustomerID=o.CustomerID;
+same with no aliases
+SELECT Orders.OrderID, Orders.OrderDate, Customers.CustomerName
+
+SELECT ProductName, Price, FORMAT(Now(),'YYYY-MM-DD') AS PerDate FROM Products;
+FROM Customers, Orders
+WHERE Customers.CustomerName="Around the Horn" AND Customers.CustomerID=Orders.CustomerID;
+
+
+SELECT City FROM Customers
+UNION
+SELECT City FROM Suppliers
+ORDER BY City;
+SELECT City, Country FROM Customers
+WHERE Country='Germany'
+UNION ALL
+SELECT City, Country FROM Suppliers
+WHERE Country='Germany'
+ORDER BY City;
+
+SELECT *
+INTO newtable [IN externaldb]
+FROM table1;
+SELECT * INTO CustomersBackup2013 FROM Customers; // create a backup copy of customers
+
+SELECT *          // Use the IN clause to copy the table into another database:
+INTO CustomersBackup2013 IN 'Backup.mdb'
+FROM Customers;
+
+This statement will return a single result which contains the average value of everything returned
+ in the salary column from the employee table.
+
+Another example:
+
+
+SELECT AVG(salary)
+
+
+FROM employee
+
+WHERE title = 'Programmer';
+This statement will return the average salary for all employee whose title is equal to 'Programmer'
+
+Example:
+
+
+SELECT Count(*)
+
+FROM employee;
+
+This particular statement is slightly different from the other aggregate functions since there isn't 
+a column supplied to the count function. This statement will return the number of rows in the employees table.
+
+SELECT quantity, max(price)
+ 
+FROM items_ordered
+ 
+GROUP BY quantity;
+
+SELECT dept, avg(salary)
+
+FROM employee
+
+GROUP BY dept
+
+HAVING avg(salary) > 20000;
+
+SELECT employeeid, lastname, salary
+
+FROM employee_info
+
+
+WHERE lastname IN ('Hernandez', 'Jones', 'Roberts', 'Ruiz');
+
+SELECT employeeid, age, lastname, salary
+
+FROM employee_info
+ 
+WHERE age BETWEEN 30 AND 40;
+
+ 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title> Equipment Page </title>
+			<meta http-equiv="content-type"
+		content="text/html;charset=utf-8"/>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+	</head>`
+	<body onload="document.equipment.equip_number.focus();"> 
+<header>Riverside Sports Club
+</header>
+<nav>
+</nav>
+<style>
+
+</style>
+<asideLeft><br>																																																													
+<a name = "Main Page" href="HomePage.html" TITLE = "Main Menu">Main Menu</a><br><br>
+<a name = "Facility Bookings Page" href="FacilityBookings.html" TITLE = "Facility Bookings Page">Facility Bookings Page</a><br><br>
+<a name = "Payments Page" href="PaymentsPage.html" TITLE = "Payments Page">Payments Page</a><br><br>
+<a name = "Members Page" href="MembersPage.html" TITLE = "Members Page">Members Page</a><br><br>
+<a name = "Equipment Page" href="EquipmentPage.html" TITLE = "Equipment Page">Equipment Page</a><br><br>
+<a name = "Reports Page" href="ReportsPage.html" TITLE = "Reports Page">Reports Page</a><br><br>
+
+</asideLeft>
+
+<section>
+<form name = equipment action="equip_validate.asp" onsubmit="return validateForm()" method="get">
+<fieldset>
+	<legend>Equipment</legend><br>
+	
+	<a name = "new_item_report" href="HomePage.html" TITLE = "New IR">Create an Item Report</a><br><br>
+	<a name = "update__item_report" href="HomePage.html" TITLE = "Update Item Rpt">Update an Existing Item Report</a><br><br>
+	<a name = "view_item_reports" href="HomePage.html" TITLE = "View Item Rpt">View Item Reports</a><br><br>
+	
+    Item Report Number:
+	<input type="number" name="item_num" disabled><br><br>
+	Equipment Number:
+	<input type="equip_number" name="equip_number" required><br><br>
+	Description<br>
+	<textarea name="equip_desc" rows="5" cols="50" required>			
+	</textarea><br><br>
+	Equipment is available to use:
+	<input type="checkbox" name="equip_repair_status" value="equip_repair_status" ><br><br>
+	Fix Date:
+	<input type="date" name="fix_date" required><br><br>
+	Cost:
+	<input type="text" name="cost" required><br><br>
+    <br><br>
+    <input type="submit" value="Submit">
+  </fieldset>
+  </form>
+</section>
+<asideRight style = "float: right;">
+</asideRight>
+<footer> RoseberryDesigns.com
+</footer>
+</body>
+</html>

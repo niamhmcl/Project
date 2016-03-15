@@ -1,0 +1,78 @@
+body{
+background-color: peru; 
+
+}
+header{
+	background-color:  Peru;
+	height: 100px;
+	width: 100%;
+	font-size: 50px;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+}
+section{ 
+	
+/*	background-image: url("images.png"), url("woman_with_beauty_salon_vector_533057.jpg"), url("benches-sub.jpg");*/
+	
+
+	/*background-image: url(img_flwr.gif), url(paper.gif);
+    background-position: right bottom, left top;
+    background-repeat: no-repeat, repeat; 
+    padding: 15px;*/
+	background-color:  Tan;
+		height: 600px;
+		width: 900px;
+		float: left;
+		font-size: 20px;
+		font-weight: bold;
+		color: black;
+		text-align: left;
+		overflow : auto;
+}
+asideLeft{	
+	height: 600px;
+	width: 253px;
+	float: left;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	background-color:Peru;
+}
+
+asideRight{	
+	height: 600px;
+	width: 253px;
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	background-color:Peru;
+	background-image: url("../images/tennis-balls.jpg"), url("../images/woman_with_beauty_salon_vector_533057.jpg"), url("../images/benches-sub.jpg");
+	background-position: top, center, bottom;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+	back
+}
+
+footer{
+	background-color:  Peru;
+	height: 100px;
+	width: 100%;
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	float: left;
+	text-align: center;
+}
+
+a:hover {
+color: black; 
+background-color: white;
+text-decoration: none;
+border: 2px solid black; 
+
+} 
+
+
+
+    

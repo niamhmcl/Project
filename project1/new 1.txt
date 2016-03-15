@@ -1,0 +1,123 @@
+
+document.MembersPage.member_name;  
+var sp_org = document.MembersPage.sporting_organisation;  
+var mem_tel_num = document.MembersPage.member_tel_num;  
+var mem_addrss = document.MembersPage.member_address;  
+var mem_dob = document.registration.member_dob;  
+var mem_email = document.MembersPage.member_email;  
+
+if(allLetter(mem_name))  
+{  
+if(alphanumeric(mem_addrss))  
+{   
+if(allnumeric(mem_tel_num))  
+{  
+if(ValidateEmail(mem_email))  
+{  
+if(ValidDOB(mem_dob))
+{
+}   
+}  
+}   
+}  
+}  
+return false;  
+  
+} function allLetter(mem_name)  
+{   
+	var letters = /^[A-Za-z]+$/;  
+	if(mem_name.value.match(letters))  
+	{  
+		return true;  
+	}  
+	else  
+	{  
+		alert('Username must have alphabet characters only');  
+		mem_name.focus();  
+		return false;  
+	}  
+}  
+function alphanumeric(mem_addrss)  
+{   
+	var letters = /^[0-9a-zA-Z]+$/;  
+	if(mem_addrss.value.match(letters))  
+	{  
+		return true;  
+	}  
+	else  
+	{  
+		alert('User address must have alphanumeric characters only');  
+		mem_addrss.focus();  
+		return false;  
+	}  
+}  
+  
+function allnumeric(mem_tel_num)  
+{   
+	var numbers = /^[0-9]+$/;  
+	if(mem_tel_num.value.match(numbers))  
+	{  
+		return true;  
+	}  
+	else  
+	{  
+		alert('ZIP code must have numeric characters only');  
+		mem_tel_num.focus();  
+	return false;  
+	}  
+}  
+function ValidateEmail(mem_email)  
+{  
+	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+	if(mem_email.value.match(mailformat))  
+	{  
+		return true;  
+	}  
+	else  
+	{  
+		alert("You have entered an invalid email address!");  
+		mem_email.focus();  
+		return false;  
+	}  
+}
+function validateDOB(mem_dob)
+{
+    var dob = mem_dob;
+    var pattern =/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/;
+    if (dob == null || dob == "" || !pattern.test(dob)) {
+        errMessage += "Invalid date of birth\n";
+        return false;
+    }
+    else {
+        return true
+    }
+} 
+} 
+
+
+
+	
+	var y = document.forms["MembersPage"]["email"].value;
+    if (x == null || x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+	Member Telephone Number:
+	<input type="tel" name="member_tel_num" required><br><br>
+	var x = document.forms["MembersPage"]["email"].value;
+    if (x == null || x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+	Member Address<br>
+	<textarea name="member_address" rows="5" cols="50" required position=top >			
+	</textarea><br><br>
+	var x = document.forms["MembersPage"]["email"].value;
+    if (x == null || x == "") {
+        alert("Name must be filled out");
+        return false;
+    }
+	Member Email:
+	<input type = "email" name="member_email" ><br><br>
+}
+ 
